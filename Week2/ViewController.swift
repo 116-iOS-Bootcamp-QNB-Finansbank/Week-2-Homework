@@ -14,6 +14,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.dataSource = self
+        tableView.delegate = self
         configureUI()
     }
     
@@ -31,8 +33,23 @@ class ViewController: UIViewController {
         }) else { return }
         print(resultArray)
         fibonacciResultArray = resultArray
+        self.tableView.reloadData()
     }
 
 
+}
+
+
+extension ViewController : UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return fibonacciResultArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        cell.textLabel?.text = String(fibonacciResultArray[indexPath.row])
+        cell.selectionStyle = .none
+        return cell
+    }
 }
 
