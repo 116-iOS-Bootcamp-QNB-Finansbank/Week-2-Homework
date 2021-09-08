@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
+    var fibonacciResultArray = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +26,11 @@ class ViewController: UIViewController {
     
     
     @objc func showFibonacciResults(){
-        
+        guard let resultArray =  MathOperations.shared.calculateFibonacci(upperLimit: 1000)?.filter({ number in
+            number > 750
+        }) else { return }
+        print(resultArray)
+        fibonacciResultArray = resultArray
     }
 
 
